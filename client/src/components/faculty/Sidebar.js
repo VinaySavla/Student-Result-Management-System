@@ -80,7 +80,7 @@ const Sidebar = () => {
             <h1 className="font-normal">Result</h1>
           </NavLink>
         </div> */}
-        <div className="">
+        {/* <div className="">
           <NavLink
             to="/faculty/result"
             className={({ isActive }) =>
@@ -89,7 +89,7 @@ const Sidebar = () => {
             <EngineeringIcon className="" />
             <h1 className="font-normal">Result</h1>
           </NavLink>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ const TestResult = () => {
   useEffect(() => {
     dispatch(
       getTestResult(
+        user.result.username,
         user.result.department,
         user.result.year,
         user.result.section

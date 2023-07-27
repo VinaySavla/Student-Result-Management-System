@@ -55,9 +55,10 @@ export const getSubject = (department, year) => async (dispatch) => {
 };
 
 export const getTestResult =
-  (department, year, section) => async (dispatch) => {
+  (username,department, year, section) => async (dispatch) => {
     try {
       const formData = {
+        username,
         department,
         year,
         section,

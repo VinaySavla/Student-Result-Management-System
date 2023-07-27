@@ -19,6 +19,7 @@ const StudentHome = () => {
     dispatch(getSubject(user.result.department, user.result.year));
     dispatch(
       getTestResult(
+        user.result.username,
         user.result.department,
         user.result.year,
         user.result.section

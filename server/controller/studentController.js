@@ -139,9 +139,9 @@ export const updateStudent = async (req, res) => {
 
 export const testResult = async (req, res) => {
   try {
-    const { department, year, section } = req.body;
+    const { username, department, year, section } = req.body;
     const errors = { notestError: String };
-    const student = await Student.findOne({ department, year, section });
+    const student = await Student.findOne({ username, department, year, section });
     const test = await Test.find({ department, year, section });
     if (test.length === 0) {
       errors.notestError = "No Test Found";
