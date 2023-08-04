@@ -85,8 +85,8 @@ const Body = () => {
                 <div className={classes.adminForm3}>
                   <h1 className={classes.adminLabel}>Test Name :</h1>
 
-                  <input
-                    placeholder="Test Name"
+                  
+                  <Select
                     required
                     className={classes.adminInput}
                     type="text"
@@ -94,7 +94,17 @@ const Body = () => {
                     onChange={(e) =>
                       setValue({ ...value, test: e.target.value })
                     }
-                  />
+                    displayEmpty
+                    sx={{ height: 36 }}
+                    inputProps={{ "aria-label": "Without label" }}
+                    >
+                    <MenuItem value="">None</MenuItem>
+                    <MenuItem value="IA-1">IA-1</MenuItem>
+                    <MenuItem value="IA-2">IA-2</MenuItem>
+                    <MenuItem value="EndSemesterExam">End Semester Exam</MenuItem>
+                    <MenuItem value="TermWork">Term Work</MenuItem>
+                    <MenuItem value="PracticalExamination">Practical Examination</MenuItem>
+                  </Select>
                 </div>
 
                 <div className={classes.adminForm3}>

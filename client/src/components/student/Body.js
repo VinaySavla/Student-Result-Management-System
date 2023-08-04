@@ -54,7 +54,7 @@ const Body = () => {
                 <h2 className="text-2xl font-bold">{testResult?.length}</h2>
               </div>
             </div>
-            <div className="flex items-center space-x-4 border-r-2">
+            {/* <div className="flex items-center space-x-4 border-r-2">
               <SupervisorAccountIcon
                 className="rounded-full py-2 bg-orange-300"
                 sx={{ fontSize: 40 }}
@@ -63,7 +63,7 @@ const Body = () => {
                 <h1>Attendance</h1>
                 <h2 className="text-2xl font-bold">{totalAttendance}</h2>
               </div>
-            </div>
+            </div> */}
             <div className="flex items-center space-x-4 ">
               <MenuBookIcon
                 className="rounded-full py-2 bg-orange-300"
