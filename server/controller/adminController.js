@@ -231,6 +231,7 @@ export const addFaculty = async (req, res) => {
   try {
     const {
       name,
+      username,
       dob,
       department,
       contactNumber,
@@ -261,7 +262,7 @@ export const addFaculty = async (req, res) => {
     var date = new Date();
     var components = ["FAC", date.getFullYear(), departmentHelper, helper];
 
-    var username = components.join("");
+    var registrationNumber = components.join("");
     let hashedPassword;
     const newDob = dob.split("-").reverse().join("-");
 
@@ -270,10 +271,11 @@ export const addFaculty = async (req, res) => {
 
     const newFaculty = await new Faculty({
       name,
+      username,
       email,
       password: hashedPassword,
       joiningYear,
-      username,
+      registrationNumber: registrationNumber,
       department,
       avatar,
       contactNumber,
@@ -488,6 +490,7 @@ export const addStudent = async (req, res) => {
   try {
     const {
       name,
+      username,
       dob,
       department,
       contactNumber,
@@ -523,7 +526,7 @@ export const addStudent = async (req, res) => {
     var date = new Date();
     var components = ["STU", date.getFullYear(), departmentHelper, helper];
 
-    var username = components.join("");
+    var registrationNumber = components.join("");
     let hashedPassword;
     const newDob = dob.split("-").reverse().join("-");
 
@@ -534,6 +537,7 @@ export const addStudent = async (req, res) => {
       name,
       dob,
       password: hashedPassword,
+      registrationNumber: registrationNumber,
       username,
       department,
       contactNumber,

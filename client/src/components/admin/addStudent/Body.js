@@ -19,6 +19,7 @@ const Body = () => {
 
   const [value, setValue] = useState({
     name: "",
+    username: "",
     dob: "",
     email: "",
     department: "",
@@ -55,6 +56,7 @@ const Body = () => {
       if (store.admin.studentAdded) {
         setValue({
           name: "",
+          username: "",
           dob: "",
           email: "",
           department: "",
@@ -106,6 +108,20 @@ const Body = () => {
                     value={value.name}
                     onChange={(e) =>
                       setValue({ ...value, name: e.target.value })
+                    }
+                  />
+                </div>
+                <div className={classes.adminForm3}>
+                  <h1 className={classes.adminLabel}>Username :</h1>
+
+                  <input
+                    placeholder="Username"
+                    required
+                    className={classes.adminInput}
+                    type="text"
+                    value={value.username}
+                    onChange={(e) =>
+                      setValue({ ...value, username: e.target.value })
                     }
                   />
                 </div>
@@ -326,6 +342,7 @@ const Body = () => {
                 onClick={() => {
                   setValue({
                     name: "",
+                    username: "",
                     dob: "",
                     email: "",
                     department: "",

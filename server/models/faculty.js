@@ -5,6 +5,9 @@ const facultySchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  username: {
+    type: String,
+  },
   email: {
     type: String,
     required: true,
@@ -16,7 +19,7 @@ const facultySchema = mongoose.Schema({
   password: {
     type: String,
   },
-  username: {
+  registrationNumber: {
     type: String,
   },
   gender: {

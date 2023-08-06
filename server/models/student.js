@@ -30,6 +30,9 @@ const studentSchema = new Schema({
   username: {
     type: String,
   },
+  registrationNumber: {
+    type: String,
+  },
   gender: {
     type: String,
   },
