@@ -8,6 +8,7 @@ import {
   getFaculty,
   addSubject,
   getSubject,
+  getSubjectCount,
   addStudent,
   getStudent,
   addDepartment,
@@ -43,6 +44,7 @@ router.post("/addfaculty", addFaculty);
 router.post("/getfaculty", auth, getFaculty);
 router.post("/addsubject", auth, addSubject);
 router.post("/getsubject", auth, getSubject);
+router.post("/getsubjectcount", auth, getSubjectCount);
 router.post("/addstudent", addStudent);
 router.post("/getstudent", auth, getStudent);
 router.post("/getnotice", auth, getNotice);

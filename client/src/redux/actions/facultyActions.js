@@ -8,6 +8,7 @@ import {
   GET_STUDENT,
   MARKS_UPLOADED,
   ATTENDANCE_MARKED,
+  GET_SUBJECT,
 } from "../actionTypes";
 import * as api from "../api";
 
@@ -85,6 +86,15 @@ export const uploadMark =
       const { data } = await api.uploadMarks(formData);
       alert("Marks Uploaded Successfully");
       dispatch({ type: MARKS_UPLOADED, payload: true });
+    } catch (error) {
+      dispatch({ type: SET_ERRORS, payload: error.response.data });
+    }
+  };
+
+  export const getSubjectCount = () => async (dispatch) => {
+    try {
+      const { data } = await api.getSubjectCount();
+      dispatch({ type: GET_SUBJECT, payload: data });
     } catch (error) {
       dispatch({ type: SET_ERRORS, payload: error.response.data });
     }

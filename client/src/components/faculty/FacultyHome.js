@@ -4,10 +4,13 @@ import { getNotice } from "../../redux/actions/adminActions";
 import Body from "./Body";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import { getSubjectCount } from "../../redux/actions/facultyActions";
 
 const FacultyHome = () => {
+  const user = JSON.parse(localStorage.getItem("user")); 
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(getSubjectCount());
     dispatch(getNotice());
   }, [dispatch]);
   return (
@@ -20,7 +23,7 @@ const FacultyHome = () => {
         </div>
       </div>
     </div>
-  );
+  ); 
 };
 
 export default FacultyHome;

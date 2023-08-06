@@ -11,10 +11,12 @@ import Notice from "../notices/Notice";
 import ReplyIcon from "@mui/icons-material/Reply";
 import ShowNotice from "../notices/ShowNotice";
 const Body = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [openNotice, setOpenNotice] = useState({});
   const notices = useSelector((state) => state.admin.notices.result);
+  const subjects = useSelector((state) => state.admin.subjects.result);
 
   return (
     <div className="flex-[0.8] mt-3">
@@ -25,17 +27,17 @@ const Body = () => {
         </div>
         <div className="flex flex-col mr-5 space-y-4 overflow-y-auto">
           <div className="bg-white h-[8rem] rounded-xl shadow-lg grid grid-cols-4 justify-between px-8 items-center space-x-4">
-            <div className="flex items-center space-x-4 border-r-2">
+            <div className="flex items-center space-x-4 border-r-">
               <EngineeringIcon
                 className="rounded-full py-2 bg-orange-300"
                 sx={{ fontSize: 40 }}
               />
               <div className="flex flex-col">
-                <h1>Class</h1>
-                <h2 className="text-2xl font-bold">12</h2>
+                <h1>Department</h1>
+                <h2 className="text-2s font-bold">{user.result.department}</h2>
               </div>
             </div>
-            <div className="flex items-center space-x-4 border-r-2">
+            {/* <div className="flex items-center space-x-4 border-r-2">
               <BoyIcon
                 className="rounded-full py-2 bg-orange-300"
                 sx={{ fontSize: 40 }}
@@ -52,7 +54,7 @@ const Body = () => {
               />
               <div className="flex flex-col">
                 <h1>Subject</h1>
-                <h2 className="text-2xl font-bold">5</h2>
+                <h2 className="text-2xl font-bold">{subjects}</h2>
               </div>
             </div>
             <div className="flex items-center space-x-4 ">
@@ -64,7 +66,7 @@ const Body = () => {
                 <h1>Test</h1>
                 <h2 className="text-2xl font-bold">3</h2>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="flex space-x-4">
             <div className="flex flex-col space-y-4 w-2/6">
