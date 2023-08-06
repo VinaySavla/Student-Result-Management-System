@@ -35,6 +35,16 @@ const Body = () => {
         <div className="flex flex-col mr-5 space-y-4 overflow-y-auto">
           <div className="bg-white h-[8rem] rounded-xl shadow-lg grid grid-cols-4 justify-between px-8 items-center space-x-4">
             <div className="flex items-center space-x-4 border-r-2">
+              <SupervisorAccountIcon
+                className="rounded-full py-2 bg-orange-300"
+                sx={{ fontSize: 40 }}
+              />
+              <div className="flex flex-col">
+                <h1>Department</h1>
+                <h2 className="text-2s font-bold">{user.result.department}</h2>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4 border-r-2">
               <EngineeringIcon
                 className="rounded-full py-2 bg-orange-300"
                 sx={{ fontSize: 40 }}
@@ -54,16 +64,6 @@ const Body = () => {
                 <h2 className="text-2xl font-bold">{testResult?.length}</h2>
               </div>
             </div>
-            {/* <div className="flex items-center space-x-4 border-r-2">
-              <SupervisorAccountIcon
-                className="rounded-full py-2 bg-orange-300"
-                sx={{ fontSize: 40 }}
-              />
-              <div className="flex flex-col">
-                <h1>Attendance</h1>
-                <h2 className="text-2xl font-bold">{totalAttendance}</h2>
-              </div>
-            </div> */}
             <div className="flex items-center space-x-4 ">
               <MenuBookIcon
                 className="rounded-full py-2 bg-orange-300"

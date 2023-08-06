@@ -27,7 +27,7 @@ const Body = () => {
         </div>
         <div className="flex flex-col mr-5 space-y-4 overflow-y-auto">
           <div className="bg-white h-[8rem] rounded-xl shadow-lg grid grid-cols-4 justify-between px-8 items-center space-x-4">
-            <div className="flex items-center space-x-4 border-r-">
+            <div className="flex items-center space-x-4 border-r-2">
               <EngineeringIcon
                 className="rounded-full py-2 bg-orange-300"
                 sx={{ fontSize: 40 }}
@@ -37,17 +37,17 @@ const Body = () => {
                 <h2 className="text-2s font-bold">{user.result.department}</h2>
               </div>
             </div>
-            {/* <div className="flex items-center space-x-4 border-r-2">
+            <div className="flex items-center space-x-4 border-r-2">
               <BoyIcon
                 className="rounded-full py-2 bg-orange-300"
                 sx={{ fontSize: 40 }}
               />
               <div className="flex flex-col">
-                <h1>Student</h1>
-                <h2 className="text-2xl font-bold">10</h2>
+                <h1>Designation</h1>
+                <h2 className="text-2s font-bold">{user.result.designation}</h2>
               </div>
             </div>
-            <div className="flex items-center space-x-4 border-r-2">
+            {/* <div className="flex items-center space-x-4 border-r-2">
               <SupervisorAccountIcon
                 className="rounded-full py-2 bg-orange-300"
                 sx={{ fontSize: 40 }}
