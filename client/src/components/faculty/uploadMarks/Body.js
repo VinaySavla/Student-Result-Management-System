@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BoyIcon from "@mui/icons-material/Boy";
-import { useDispatch, useSelector } from "react-redux";
+import { connectAdvanced, useDispatch, useSelector } from "react-redux";
 import { getStudent, uploadMark } from "../../../redux/actions/facultyActions";
 import { MenuItem, Select } from "@mui/material";
 import Spinner from "../../../utils/Spinner";
@@ -10,18 +10,28 @@ import { getTest } from "../../../redux/actions/facultyActions";
 const Body = () => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
-
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
   const store = useSelector((state) => state);
   const tests = store.faculty.tests.result;
+  // const subjectCode = tests?.map((test) => test.subjectCode);
   const [marks, setMarks] = useState([]);
+  var sc = [];
+  var allTest = [];
+
+  for (var i = 0; i < tests?.length; i++) {
+    sc.push(tests[i].subjectCode);
+    allTest.push(tests[i].test);
+  }
+  const subjectCode = Array.from(new Set(sc));
+  const test = Array.from(new Set(allTest));
 
   const [value, setValue] = useState({
     department: "",
     year: "",
     section: "",
     test: "",
+    subjectCode:"",
   });
   const [search, setSearch] = useState(false);
 
@@ -29,7 +39,7 @@ const Body = () => {
     if (Object.keys(store.errors).length !== 0) {
       setError(store.errors);
       setLoading(false);
-      setValue({ department: "", year: "", section: "", test: "" });
+      setValue({ department: "", year: "", section: "", test: "",subjectCode:"" });
     }
   }, [store.errors]);
 
@@ -56,7 +66,7 @@ const Body = () => {
   const uploadMarks = (e) => {
     setError({});
     dispatch(
-      uploadMark(marks, value.department, value.section, value.year, value.test)
+      uploadMark(marks, value.department, value.section, value.year, value.test, value.subjectCode)
     );
   };
 
@@ -73,7 +83,7 @@ const Body = () => {
     if (store.errors || store.faculty.marksUploaded) {
       setLoading(false);
       if (store.faculty.marksUploaded) {
-        setValue({ department: "", year: "", test: "", section: "" });
+        setValue({ department: "", year: "", test: "", section: "",subjectCode:"" });
         setSearch(false);
         dispatch({ type: SET_ERRORS, payload: {} });
         dispatch({ type: MARKS_UPLOADED, payload: false });
@@ -84,10 +94,10 @@ const Body = () => {
   }, [store.errors, store.faculty.marksUploaded]);
 
   useEffect(() => {
-    if (value.year !== "" && value.section !== "") {
+    if (value.year !== "" && value.section !== "" ) {
       dispatch(getTest(value));
     }
-  }, [value.year, value.section]);
+  }, [value.year, value.section,]);
 
   return (
     <div className="flex-[0.8] mt-3">
@@ -127,6 +137,21 @@ const Body = () => {
               <MenuItem value="2">2</MenuItem>
               <MenuItem value="3">3</MenuItem>
             </Select>
+            <label htmlFor="year">Subject Code</label>
+            <Select
+              required
+              displayEmpty
+              sx={{ height: 36, width: 224 }}
+              inputProps={{ "aria-label": "Without label" }}
+              value={value.subjectCode}
+              onChange={(e) => setValue({ ...value, subjectCode: e.target.value })}>
+              <MenuItem value="">None</MenuItem>
+              {subjectCode?.map((subjectCode, idx) => (
+                <MenuItem value={subjectCode} key={idx}>
+                  {subjectCode}
+                </MenuItem>
+              ))}
+            </Select>
             <label htmlFor="year">Test</label>
             <Select
               required
@@ -136,9 +161,9 @@ const Body = () => {
               value={value.test}
               onChange={(e) => setValue({ ...value, test: e.target.value })}>
               <MenuItem value="">None</MenuItem>
-              {tests?.map((test, idx) => (
-                <MenuItem value={test.test} key={idx}>
-                  {test.test}
+              {test?.map((test, idx) => (
+                <MenuItem value={test} key={idx}>
+                  {test}
                 </MenuItem>
               ))}
             </Select>

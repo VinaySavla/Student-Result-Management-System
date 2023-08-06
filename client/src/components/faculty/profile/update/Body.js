@@ -188,7 +188,7 @@ const Body = () => {
               </button>
 
               <button
-                onClick={() => navigate("/admin/profile")}
+                onClick={() => navigate("/faculty/profile")}
                 className={classes.adminFormClearButton}
                 type="button">
                 Cancel
