@@ -107,7 +107,7 @@ export const updateAdmin = async (req, res) => {
 
 export const addAdmin = async (req, res) => {
   try {
-    const { name, dob, department, contactNumber, avatar, email, joiningYear } =
+    const { name, dob, username, contactNumber, avatar, email, joiningYear } =
       req.body;
     const errors = { emailError: String };
     const existingAdmin = await Admin.findOne({ email });
@@ -115,9 +115,9 @@ export const addAdmin = async (req, res) => {
       errors.emailError = "Email already exists";
       return res.status(400).json(errors);
     }
-    const existingDepartment = await Department.findOne({ department });
-    let departmentHelper = existingDepartment.departmentCode;
-    const admins = await Admin.find({ department });
+    // const existingDepartment = await Department.findOne({ department });
+    // let departmentHelper = existingDepartment.departmentCode;
+    const admins = await Admin.find({email});
 
     let helper;
     if (admins.length < 10) {
@@ -128,11 +128,11 @@ export const addAdmin = async (req, res) => {
       helper = admins.length.toString();
     }
     var date = new Date();
-    var components = ["ADM", date.getFullYear(), departmentHelper, helper];
+    var components = ["ADM", date.getFullYear(), helper];
 
-    var username = components.join("");
+    // var username = components.join("");
     let hashedPassword;
-    const newDob = dob.split("-").reverse().join("-");
+    const newDob = username+"@"+dob.split("-").reverse().join("-");
 
     hashedPassword = await bcrypt.hash(newDob, 10);
     var passwordUpdated = false;
@@ -142,7 +142,7 @@ export const addAdmin = async (req, res) => {
       password: hashedPassword,
       joiningYear,
       username,
-      department,
+      // department,
       avatar,
       contactNumber,
       dob,
@@ -264,7 +264,7 @@ export const addFaculty = async (req, res) => {
 
     var registrationNumber = components.join("");
     let hashedPassword;
-    const newDob = dob.split("-").reverse().join("-");
+    const newDob = username+"@"+dob.split("-").reverse().join("-");
 
     hashedPassword = await bcrypt.hash(newDob, 10);
     var passwordUpdated = false;
@@ -416,7 +416,7 @@ export const getAdmin = async (req, res) => {
 
     const admins = await Admin.find({ department });
     if (admins.length === 0) {
-      errors.noAdminError = "No Subject Found";
+      errors.noAdminError = "No Admins Found";
       return res.status(404).json(errors);
     }
     res.status(200).json({ result: admins });
@@ -548,7 +548,7 @@ export const addStudent = async (req, res) => {
 
     var registrationNumber = components.join("");
     let hashedPassword;
-    const newDob = dob.split("-").reverse().join("-");
+    const newDob = username+"@"+dob.split("-").reverse().join("-");
 
     hashedPassword = await bcrypt.hash(newDob, 10);
     var passwordUpdated = false;

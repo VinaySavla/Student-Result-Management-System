@@ -48,7 +48,7 @@ export const deleteSubject = (data) =>
 export const deleteDepartment = (data) =>
   API.post("/api/admin/deletedepartment", data);
 
-export const getAdmin = (admin) => API.post("/api/admin/getadmin", admin);
+export const getAdmin = () => API.post("/api/admin/getadmin");
 
 export const addDepartment = (department) =>
   API.post("/api/admin/adddepartment", department);

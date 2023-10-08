@@ -9,14 +9,14 @@ import { DELETE_ADMIN, SET_ERRORS } from "../../../redux/actionTypes";
 
 const Body = () => {
   const dispatch = useDispatch();
-  const departments = useSelector((state) => state.admin.allDepartment);
+  // const departments = useSelector((state) => state.admin.allDepartment);
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
   const store = useSelector((state) => state);
   const [checkedValue, setCheckedValue] = useState([]);
 
   const [value, setValue] = useState({
-    department: "",
+    // department: "",
   });
   const [search, setSearch] = useState(false);
 
@@ -44,7 +44,7 @@ const Body = () => {
     setSearch(true);
     setLoading(true);
     setError({});
-    dispatch(getAdmin(value));
+    dispatch(getAdmin());
   };
   const students = useSelector((state) => state.admin.students.result);
 
@@ -56,7 +56,7 @@ const Body = () => {
 
   useEffect(() => {
     if (store.admin.adminDeleted) {
-      setValue({ department: "", year: "" });
+      setValue({ });
       setLoading(false);
       setSearch(false);
       dispatch({ type: DELETE_ADMIN, payload: false });
@@ -82,7 +82,7 @@ const Body = () => {
           <form
             className="flex flex-col space-y-2 col-span-1"
             onSubmit={handleSubmit}>
-            <label htmlFor="department">Department</label>
+            {/* <label htmlFor="department">Department</label>
             <Select
               required
               displayEmpty
@@ -98,12 +98,12 @@ const Body = () => {
                   {dp.department}
                 </MenuItem>
               ))}
-            </Select>
+            </Select> */}
 
             <button
               className={`${classes.adminFormSubmitButton} w-56`}
               type="submit">
-              Search
+              Get Admins
             </button>
           </form>
           <div className="col-span-3 mr-6">

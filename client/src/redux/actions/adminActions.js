@@ -122,9 +122,9 @@ export const createNotice = (formData) => async (dispatch) => {
     dispatch({ type: SET_ERRORS, payload: error.response.data });
   }
 };
-export const getAdmin = (formData) => async (dispatch) => {
+export const getAdmin = () => async (dispatch) => {
   try {
-    const { data } = await api.getAdmin(formData);
+    const { data } = await api.getAdmin();
     dispatch({ type: GET_STUDENT, payload: data });
   } catch (error) {
     dispatch({ type: SET_ERRORS, payload: error.response.data });

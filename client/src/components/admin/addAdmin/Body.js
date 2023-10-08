@@ -12,14 +12,14 @@ import { ADD_ADMIN, SET_ERRORS } from "../../../redux/actionTypes";
 const Body = () => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state);
-  const departments = useSelector((state) => state.admin.allDepartment);
+  // const departments = useSelector((state) => state.admin.allDepartment);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
   const [value, setValue] = useState({
     name: "",
     dob: "",
     email: "",
-    department: "",
+    username: "",
     contactNumber: "",
     avatar: "",
     joiningYear: Date().split(" ")[3],
@@ -46,12 +46,11 @@ const Body = () => {
           name: "",
           dob: "",
           email: "",
-          department: "",
+          username: "",
           contactNumber: "",
           avatar: "",
           joiningYear: Date().split(" ")[3],
           password: "",
-          username: "",
         });
         dispatch({ type: SET_ERRORS, payload: {} });
         dispatch({ type: ADD_ADMIN, payload: false });
@@ -121,7 +120,7 @@ const Body = () => {
                 </div>
               </div>
               <div className={classes.adminForm2r}>
-                <div className={classes.adminForm3}>
+                {/* <div className={classes.adminForm3}>
                   <h1 className={classes.adminLabel}>Department :</h1>
                   <Select
                     required
@@ -139,6 +138,20 @@ const Body = () => {
                       </MenuItem>
                     ))}
                   </Select>
+                </div> */}
+                <div className={classes.adminForm3}>
+                  <h1 className={classes.adminLabel}>Username :</h1>
+
+                  <input
+                    required
+                    placeholder="Username"
+                    className={classes.adminInput}
+                    type="text"
+                    value={value.username}
+                    onChange={(e) =>
+                      setValue({ ...value, username: e.target.value })
+                    }
+                  />
                 </div>
                 <div className={classes.adminForm3}>
                   <h1 className={classes.adminLabel}>Contact Number :</h1>
@@ -177,12 +190,11 @@ const Body = () => {
                     name: "",
                     dob: "",
                     email: "",
-                    department: "",
+                    username: "",
                     contactNumber: "",
                     avatar: "",
                     joiningYear: Date().split(" ")[3],
                     password: "",
-                    username: "",
                   });
                   setError({});
                 }}
