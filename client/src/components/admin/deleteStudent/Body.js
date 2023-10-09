@@ -148,7 +148,7 @@ const Body = () => {
                       Select
                     </h1>
                     <h1 className={`col-span-1 ${classes.adminDataHeading}`}>
-                      Sr no.
+                      Sr No.
                     </h1>
                     <h1 className={`col-span-2 ${classes.adminDataHeading}`}>
                       Name
@@ -158,7 +158,7 @@ const Body = () => {
                     </h1>
 
                     <h1 className={`col-span-2 ${classes.adminDataHeading}`}>
-                      Section
+                      Division
                     </h1>
                   </div>
                   {students?.map((adm, idx) => (
@@ -186,7 +186,7 @@ const Body = () => {
 
                       <h1
                         className={`col-span-2 ${classes.adminDataBodyFields}`}>
-                        {adm.section}
+                        {adm.division}
                       </h1>
                     </div>
                   ))}

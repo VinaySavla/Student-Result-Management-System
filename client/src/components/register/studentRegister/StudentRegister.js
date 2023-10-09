@@ -18,7 +18,7 @@ const StudentRegister = () => {
   const [gender, setGender] = useState(undefined);
   const [department, setDepartment] = useState("");
   const [fatherName, setFatherName] = useState("");
-  const [section, setSection] = useState(undefined);
+  const [division, setdivision] = useState(undefined);
   const [translate, setTranslate] = useState(false);
   const [subjects, setSubjects] = useState(undefined);
   const [fatherContact, setFatherContact] = useState("");
@@ -210,13 +210,13 @@ const StudentRegister = () => {
             </div>
           </div>
           <div className="space-y-1">
-            <p className="text-[#515966] font-bold text-sm">Section</p>
+            <p className="text-[#515966] font-bold text-sm">division</p>
             <div className="bg-[#515966] rounded-lg w-[14rem] flex  items-center">
               <input
                 required
                 type="text"
-                value={section}
-                onChange={(e) => setSection(e.target.value)}
+                value={division}
+                onChange={(e) => setdivision(e.target.value)}
                 className="bg-[#515966] text-white px-2 outline-none py-2 rounded-lg placeholder:text-sm"
               />
             </div>

@@ -80,7 +80,7 @@ export const updateStudent = async (req, res) => {
       avatar,
       email,
       batch,
-      section,
+      division,
       year,
       fatherName,
       motherName,
@@ -107,8 +107,8 @@ export const updateStudent = async (req, res) => {
       updatedStudent.batch = batch;
       await updatedStudent.save();
     }
-    if (section) {
-      updatedStudent.section = section;
+    if (division) {
+      updatedStudent.division = division;
       await updatedStudent.save();
     }
     if (year) {
@@ -139,10 +139,10 @@ export const updateStudent = async (req, res) => {
 
 export const testResult = async (req, res) => {
   try {
-    const { username, department, year, section } = req.body;
+    const { username, department, year, division } = req.body;
     const errors = { notestError: String };
-    const student = await Student.findOne({ username, department, year, section });
-    const test = await Test.find({ department, year, section });
+    const student = await Student.findOne({ username, department, year, division });
+    const test = await Test.find({ department, year, division });
     if (test.length === 0) {
       errors.notestError = "No Test Found";
       return res.status(404).json(errors);
@@ -176,9 +176,9 @@ export const testResult = async (req, res) => {
 
 export const attendance = async (req, res) => {
   try {
-    const { department, year, section } = req.body;
+    const { department, year, division } = req.body;
     const errors = { notestError: String };
-    const student = await Student.findOne({ department, year, section });
+    const student = await Student.findOne({ department, year, division });
 
     const attendence = await Attendence.find({
       student: student._id,

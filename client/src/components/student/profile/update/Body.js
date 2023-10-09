@@ -30,7 +30,7 @@ const Body = () => {
     motherName: "",
     fatherName: "",
     fatherContactNumber: "",
-    section: "",
+    division: "",
   });
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const Body = () => {
       value.motherName === "" &&
       value.fatherName === "" &&
       value.fatherContactNumber === "" &&
-      value.section === ""
+      value.division === ""
     ) {
       alert("Enter atleast one value");
       setLoading(false);
@@ -215,14 +215,14 @@ const Body = () => {
                   />
                 </div>
                 <div className={classes.adminForm3}>
-                  <h1 className={classes.adminLabel}>Section :</h1>
+                  <h1 className={classes.adminLabel}>Division :</h1>
                   <input
-                    placeholder={user.result?.section}
+                    placeholder={user.result?.division}
                     className={classes.adminInput}
                     type="text"
-                    value={value.section}
+                    value={value.division}
                     onChange={(e) =>
-                      setValue({ ...value, section: e.target.value })
+                      setValue({ ...value, division: e.target.value })
                     }
                   />
                 </div>

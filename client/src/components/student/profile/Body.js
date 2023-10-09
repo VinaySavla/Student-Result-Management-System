@@ -43,7 +43,7 @@ const Body = () => {
                   label="Contact Number"
                   value={user.result.contactNumber}
                 />
-                <Data label="Section" value={user.result.section} />
+                <Data label="division" value={user.result.division} />
                 <Data
                   label="Father's Contact Number"
                   value={user.result.fatherContactNumber}

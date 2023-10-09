@@ -15,7 +15,7 @@ const Attendance = () => {
       getAttendance(
         user.result.department,
         user.result.year,
-        user.result.section
+        user.result.division
       )
     );
   }, [dispatch]);

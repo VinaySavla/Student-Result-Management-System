@@ -55,13 +55,13 @@ export const getSubject = (department, year) => async (dispatch) => {
 };
 
 export const getTestResult =
-  (username,department, year, section) => async (dispatch) => {
+  (username,department, year, division) => async (dispatch) => {
     try {
       const formData = {
         username,
         department,
         year,
-        section,
+        division,
       };
       const { data } = await api.getTestResult(formData);
       dispatch({ type: TEST_RESULT, payload: data });
@@ -71,12 +71,12 @@ export const getTestResult =
   };
 
 export const getAttendance =
-  (department, year, section) => async (dispatch) => {
+  (department, year, division) => async (dispatch) => {
     try {
       const formData = {
         department,
         year,
-        section,
+        division,
       };
       const { data } = await api.getAttendance(formData);
       dispatch({ type: ATTENDANCE, payload: data });

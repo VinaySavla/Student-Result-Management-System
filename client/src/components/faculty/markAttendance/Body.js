@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { useDispatch, useSelector } from "react-redux";
-import { createTest } from "../../../redux/actions/facultyActions";
+import { createTest, markAttendance } from "../../../redux/actions/facultyActions";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Spinner from "../../../utils/Spinner";
@@ -15,7 +15,7 @@ const Body = () => {
   const [error, setError] = useState({});
   const [value, setValue] = useState({
     subjectCode: "",
-    section: "",
+    division: "",
     year: "",
     test: "",
     totalMarks: "",
@@ -28,7 +28,7 @@ const Body = () => {
       setError(store.errors);
       setValue({
         subjectCode: "",
-        section: "",
+        division: "",
         year: "",
         test: "",
         totalMarks: "",
@@ -42,7 +42,7 @@ const Body = () => {
     e.preventDefault();
     setError({});
     setLoading(true);
-    dispatch(createTest(value));
+    dispatch(markAttendance(value));
   };
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const Body = () => {
       if (store.faculty.testAdded) {
         setValue({
           subjectCode: "",
-          section: "",
+          division: "",
           year: "",
           test: "",
           totalMarks: "",
@@ -216,15 +216,15 @@ const Body = () => {
                   />
                 </div>
                 <div className={classes.adminForm3}>
-                  <h1 className={classes.adminLabel}>Section :</h1>
+                  <h1 className={classes.adminLabel}>Division :</h1>
                   <Select
                     required
                     displayEmpty
                     sx={{ height: 36 }}
                     inputProps={{ "aria-label": "Without label" }}
-                    value={value.section}
+                    value={value.division}
                     onChange={(e) =>
-                      setValue({ ...value, section: e.target.value })
+                      setValue({ ...value, division: e.target.value })
                     }>
                     <MenuItem value="">None</MenuItem>
                     <MenuItem value="1">1</MenuItem>
@@ -243,7 +243,7 @@ const Body = () => {
                 onClick={() => {
                   setValue({
                     subjectCode: "",
-                    section: "",
+                    division: "",
                     year: "",
                     test: "",
                     totalMarks: "",

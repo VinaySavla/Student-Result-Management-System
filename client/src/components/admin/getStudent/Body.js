@@ -126,7 +126,7 @@ const Body = () => {
                       Email
                     </h1>
                     <h1 className={`col-span-1 ${classes.adminDataHeading}`}>
-                      Section
+                      division
                     </h1>
                     <h1 className={`col-span-2 ${classes.adminDataHeading}`}>
                       Batch
@@ -154,7 +154,7 @@ const Body = () => {
                       </h1>
                       <h1
                         className={`col-span-1 ${classes.adminDataBodyFields}`}>
-                        {stu.section}
+                        {stu.division}
                       </h1>
                       <h1
                         className={`col-span-2 ${classes.adminDataBodyFields}`}>

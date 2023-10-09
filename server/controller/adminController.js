@@ -516,7 +516,7 @@ export const addStudent = async (req, res) => {
       contactNumber,
       avatar,
       email,
-      section,
+      division,
       gender,
       batch,
       fatherName,
@@ -563,7 +563,7 @@ export const addStudent = async (req, res) => {
       contactNumber,
       avatar,
       email,
-      section,
+      division,
       gender,
       batch,
       fatherName,
@@ -595,7 +595,7 @@ export const addStudent = async (req, res) => {
 
 export const getStudent = async (req, res) => {
   try {
-    const { department, year, section } = req.body;
+    const { department, year, division } = req.body;
     const errors = { noStudentError: String };
     const students = await Student.find({ department, year });
 

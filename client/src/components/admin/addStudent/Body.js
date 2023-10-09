@@ -30,7 +30,7 @@ const Body = () => {
     year: "",
     fatherName: "",
     motherName: "",
-    section: "",
+    division: "",
     fatherContactNumber: "",
     motherContactNumber: "",
   });
@@ -67,7 +67,7 @@ const Body = () => {
           year: "",
           fatherName: "",
           motherName: "",
-          section: "",
+          division: "",
           fatherContactNumber: "",
           motherContactNumber: "",
         });
@@ -248,7 +248,6 @@ const Body = () => {
                     <MenuItem value="">None</MenuItem>
                     <MenuItem value="Male">Male</MenuItem>
                     <MenuItem value="Female">Female</MenuItem>
-                    <MenuItem value="Other">Other</MenuItem>
                   </Select>
                 </div>
                 <div className={classes.adminForm3}>
@@ -304,20 +303,26 @@ const Body = () => {
                   />
                 </div>
                 <div className={classes.adminForm3}>
-                  <h1 className={classes.adminLabel}>Section :</h1>
+                  <h1 className={classes.adminLabel}>Division :</h1>
                   <Select
                     required
                     displayEmpty
                     sx={{ height: 36 }}
                     inputProps={{ "aria-label": "Without label" }}
-                    value={value.section}
+                    value={value.division}
                     onChange={(e) =>
-                      setValue({ ...value, section: e.target.value })
+                      setValue({ ...value, division: e.target.value })
                     }>
                     <MenuItem value="">None</MenuItem>
                     <MenuItem value="1">1</MenuItem>
                     <MenuItem value="2">2</MenuItem>
                     <MenuItem value="3">3</MenuItem>
+                    <MenuItem value="4">4</MenuItem>
+                    <MenuItem value="5">5</MenuItem>
+                    <MenuItem value="6">6</MenuItem>
+                    <MenuItem value="7">7</MenuItem>
+                    <MenuItem value="8">8</MenuItem>
+                    <MenuItem value="9">9</MenuItem>
                   </Select>
                 </div>
 
@@ -353,7 +358,7 @@ const Body = () => {
                     year: "",
                     fatherName: "",
                     motherName: "",
-                    section: "",
+                    division: "",
                     fatherContactNumber: "",
                     motherContactNumber: "",
                   });

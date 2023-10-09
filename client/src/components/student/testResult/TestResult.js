@@ -16,7 +16,7 @@ const TestResult = () => {
         user.result.username,
         user.result.department,
         user.result.year,
-        user.result.section
+        user.result.division
       )
     );
   }, [dispatch]);

@@ -29,9 +29,9 @@ const Body = () => {
   const [value, setValue] = useState({
     department: "",
     year: "",
-    section: "",
+    division: "",
     test: "",
-    subjectCode:"",
+    subjectCode: "",
   });
   const [search, setSearch] = useState(false);
 
@@ -39,7 +39,13 @@ const Body = () => {
     if (Object.keys(store.errors).length !== 0) {
       setError(store.errors);
       setLoading(false);
-      setValue({ department: "", year: "", section: "", test: "",subjectCode:"" });
+      setValue({
+        department: "",
+        year: "",
+        division: "",
+        test: "",
+        subjectCode: "",
+      });
     }
   }, [store.errors]);
 
@@ -66,7 +72,14 @@ const Body = () => {
   const uploadMarks = (e) => {
     setError({});
     dispatch(
-      uploadMark(marks, value.department, value.section, value.year, value.test, value.subjectCode)
+      uploadMark(
+        marks,
+        value.department,
+        value.division,
+        value.year,
+        value.test,
+        value.subjectCode
+      )
     );
   };
 
@@ -83,7 +96,13 @@ const Body = () => {
     if (store.errors || store.faculty.marksUploaded) {
       setLoading(false);
       if (store.faculty.marksUploaded) {
-        setValue({ department: "", year: "", test: "", section: "",subjectCode:"" });
+        setValue({
+          department: "",
+          year: "",
+          test: "",
+          division: "",
+          subjectCode: "",
+        });
         setSearch(false);
         dispatch({ type: SET_ERRORS, payload: {} });
         dispatch({ type: MARKS_UPLOADED, payload: false });
@@ -94,10 +113,10 @@ const Body = () => {
   }, [store.errors, store.faculty.marksUploaded]);
 
   useEffect(() => {
-    if (value.year !== "" && value.section !== "" ) {
+    if (value.year !== "" && value.division !== "") {
       dispatch(getTest(value));
     }
-  }, [value.year, value.section,]);
+  }, [value.year, value.division]);
 
   return (
     <div className="flex-[0.8] mt-3">
@@ -109,7 +128,8 @@ const Body = () => {
         <div className=" mr-10 bg-white grid grid-cols-4 rounded-xl pt-6 pl-6 h-[29.5rem]">
           <form
             className="flex flex-col space-y-2 col-span-1"
-            onSubmit={handleSubmit}>
+            onSubmit={handleSubmit}
+          >
             <label htmlFor="year">Year</label>
             <Select
               required
@@ -117,25 +137,33 @@ const Body = () => {
               sx={{ height: 36, width: 224 }}
               inputProps={{ "aria-label": "Without label" }}
               value={value.year}
-              onChange={(e) => setValue({ ...value, year: e.target.value })}>
+              onChange={(e) => setValue({ ...value, year: e.target.value })}
+            >
               <MenuItem value="">None</MenuItem>
               <MenuItem value="1">1</MenuItem>
               <MenuItem value="2">2</MenuItem>
               <MenuItem value="3">3</MenuItem>
               <MenuItem value="4">4</MenuItem>
             </Select>
-            <label htmlFor="section">Section</label>
+            <label htmlFor="division">Division</label>
             <Select
               required
               displayEmpty
               sx={{ height: 36, width: 224 }}
               inputProps={{ "aria-label": "Without label" }}
-              value={value.section}
-              onChange={(e) => setValue({ ...value, section: e.target.value })}>
+              value={value.division}
+              onChange={(e) => setValue({ ...value, division: e.target.value })}
+            >
               <MenuItem value="">None</MenuItem>
               <MenuItem value="1">1</MenuItem>
               <MenuItem value="2">2</MenuItem>
               <MenuItem value="3">3</MenuItem>
+              <MenuItem value="4">4</MenuItem>
+              <MenuItem value="5">5</MenuItem>
+              <MenuItem value="6">6</MenuItem>
+              <MenuItem value="7">7</MenuItem>
+              <MenuItem value="8">8</MenuItem>
+              <MenuItem value="9">9</MenuItem>
             </Select>
             <label htmlFor="year">Subject Code</label>
             <Select
@@ -144,7 +172,10 @@ const Body = () => {
               sx={{ height: 36, width: 224 }}
               inputProps={{ "aria-label": "Without label" }}
               value={value.subjectCode}
-              onChange={(e) => setValue({ ...value, subjectCode: e.target.value })}>
+              onChange={(e) =>
+                setValue({ ...value, subjectCode: e.target.value })
+              }
+            >
               <MenuItem value="">None</MenuItem>
               {subjectCode?.map((subjectCode, idx) => (
                 <MenuItem value={subjectCode} key={idx}>
@@ -159,7 +190,8 @@ const Body = () => {
               sx={{ height: 36, width: 224 }}
               inputProps={{ "aria-label": "Without label" }}
               value={value.test}
-              onChange={(e) => setValue({ ...value, test: e.target.value })}>
+              onChange={(e) => setValue({ ...value, test: e.target.value })}
+            >
               <MenuItem value="">None</MenuItem>
               {test?.map((test, idx) => (
                 <MenuItem value={test} key={idx}>
@@ -169,7 +201,8 @@ const Body = () => {
             </Select>
             <button
               className={`${classes.adminFormSubmitButton} w-56`}
-              type="submit">
+              type="submit"
+            >
               Search
             </button>
           </form>
@@ -207,7 +240,7 @@ const Body = () => {
                     </h1>
 
                     <h1 className={`col-span-1 ${classes.adminDataHeading}`}>
-                      Section
+                      Division
                     </h1>
                     <h1 className={`col-span-2 ${classes.adminDataHeading}`}>
                       Marks
@@ -216,23 +249,28 @@ const Body = () => {
                   {students?.map((stu, idx) => (
                     <div
                       key={idx}
-                      className={`${classes.adminDataBody} grid-cols-8`}>
+                      className={`${classes.adminDataBody} grid-cols-8`}
+                    >
                       <h1
-                        className={`col-span-1 ${classes.adminDataBodyFields}`}>
+                        className={`col-span-1 ${classes.adminDataBodyFields}`}
+                      >
                         {idx + 1}
                       </h1>
                       <h1
-                        className={`col-span-2 ${classes.adminDataBodyFields}`}>
+                        className={`col-span-2 ${classes.adminDataBodyFields}`}
+                      >
                         {stu.name}
                       </h1>
                       <h1
-                        className={`col-span-2 ${classes.adminDataBodyFields}`}>
+                        className={`col-span-2 ${classes.adminDataBodyFields}`}
+                      >
                         {stu.username}
                       </h1>
 
                       <h1
-                        className={`col-span-1 ${classes.adminDataBodyFields}`}>
-                        {stu.section}
+                        className={`col-span-1 ${classes.adminDataBodyFields}`}
+                      >
+                        {stu.division}
                       </h1>
                       <input
                         onChange={(e) =>
@@ -250,7 +288,8 @@ const Body = () => {
               <div className="">
                 <button
                   onClick={uploadMarks}
-                  className={`${classes.adminFormSubmitButton} bg-blue-500 mt-5 ml-[22rem]`}>
+                  className={`${classes.adminFormSubmitButton} bg-blue-500 mt-5 ml-[22rem]`}
+                >
                   Upload
                 </button>
               </div>

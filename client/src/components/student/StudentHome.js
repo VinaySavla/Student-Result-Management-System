@@ -22,14 +22,14 @@ const StudentHome = () => {
         user.result.username,
         user.result.department,
         user.result.year,
-        user.result.section
+        user.result.division
       )
     );
     dispatch(
       getAttendance(
         user.result.department,
         user.result.year,
-        user.result.section
+        user.result.division
       )
     );
     dispatch(getNotice());

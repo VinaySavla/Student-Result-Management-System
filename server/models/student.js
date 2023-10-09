@@ -46,7 +46,7 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
-  section: {
+  division: {
     type: String,
     required: true,
   },

@@ -22,7 +22,7 @@ const testSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  section: {
+  division: {
     type: String,
     required: true,
   },
