@@ -84,6 +84,17 @@ const Body = () => {
               <MenuItem value="3">3</MenuItem>
               <MenuItem value="4">4</MenuItem>
             </Select>
+            <label htmlFor="academicYear">Academic Year</label>
+            <input
+                    required
+                    placeholder="yyyy-yyyy"
+                    className={classes.adminInput}
+                    type="text"
+                    value={value.academicYear}
+                    onChange={(e) =>
+                      setValue({ ...value, academicYear: e.target.value })
+                    }
+                  />
             <button
               className={`${classes.adminFormSubmitButton} w-56`}
               type="submit">
@@ -122,15 +133,15 @@ const Body = () => {
                     <h1 className={`col-span-2 ${classes.adminDataHeading}`}>
                       Username
                     </h1>
-                    <h1 className={`col-span-2 ${classes.adminDataHeading}`}>
+                    <h1 className={`col-span-4 ${classes.adminDataHeading}`}>
                       Email
                     </h1>
                     <h1 className={`col-span-1 ${classes.adminDataHeading}`}>
-                      division
+                      Division
                     </h1>
-                    <h1 className={`col-span-2 ${classes.adminDataHeading}`}>
-                      Batch
-                    </h1>
+                    {/* <h1 className={`col-span-2 ${classes.adminDataHeading}`}>
+                      Academic Year
+                    </h1> */}
                   </div>
                   {students?.map((stu, idx) => (
                     <div
@@ -149,17 +160,17 @@ const Body = () => {
                         {stu.username}
                       </h1>
                       <h1
-                        className={`col-span-2 ${classes.adminDataBodyFields}`}>
+                        className={`col-span-4 ${classes.adminDataBodyFields}`}>
                         {stu.email}
                       </h1>
                       <h1
                         className={`col-span-1 ${classes.adminDataBodyFields}`}>
                         {stu.division}
                       </h1>
-                      <h1
+                      {/* <h1
                         className={`col-span-2 ${classes.adminDataBodyFields}`}>
-                        {stu.batch}
-                      </h1>
+                        {stu.academicYear}
+                      </h1> */}
                     </div>
                   ))}
                 </div>
