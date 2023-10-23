@@ -53,6 +53,9 @@ const studentSchema = new Schema({
   batch: {
     type: String,
   },
+  academicYear: {
+    type: String,
+  },
   contactNumber: {
     type: Number,
   },

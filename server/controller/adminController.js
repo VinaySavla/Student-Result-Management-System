@@ -519,6 +519,7 @@ export const addStudent = async (req, res) => {
       division,
       gender,
       batch,
+      academicYear,
       fatherName,
       motherName,
       fatherContactNumber,
@@ -565,6 +566,7 @@ export const addStudent = async (req, res) => {
       email,
       division,
       gender,
+      academicYear,
       batch,
       fatherName,
       motherName,
@@ -595,9 +597,9 @@ export const addStudent = async (req, res) => {
 
 export const getStudent = async (req, res) => {
   try {
-    const { department, year, division } = req.body;
+    const { department, year, academicYear } = req.body;
     const errors = { noStudentError: String };
-    const students = await Student.find({ department, year });
+    const students = await Student.find({ department, year , academicYear });
 
     if (students.length === 0) {
       errors.noStudentError = "No Student Found";

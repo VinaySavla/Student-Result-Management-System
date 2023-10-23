@@ -26,6 +26,7 @@ const Body = () => {
     contactNumber: "",
     avatar: "",
     batch: "",
+    academicYear: "",
     gender: "",
     year: "",
     fatherName: "",
@@ -63,6 +64,7 @@ const Body = () => {
           contactNumber: "",
           avatar: "",
           batch: "",
+          academicYear: "",
           gender: "",
           year: "",
           fatherName: "",
@@ -164,6 +166,20 @@ const Body = () => {
                     value={value.batch}
                     onChange={(e) =>
                       setValue({ ...value, batch: e.target.value })
+                    }
+                  />
+                </div>
+                <div className={classes.adminForm3}>
+                  <h1 className={classes.adminLabel}>Current Academic Year:</h1>
+
+                  <input
+                    required
+                    placeholder="yyyy-yyyy"
+                    className={classes.adminInput}
+                    type="text"
+                    value={value.academicYear}
+                    onChange={(e) =>
+                      setValue({ ...value, academicYear: e.target.value })
                     }
                   />
                 </div>
@@ -354,6 +370,7 @@ const Body = () => {
                     contactNumber: "",
                     avatar: "",
                     batch: "",
+                    academicYear: "",
                     gender: "",
                     year: "",
                     fatherName: "",
