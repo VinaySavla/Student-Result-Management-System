@@ -133,6 +133,7 @@ const Body = () => {
                     <MenuItem value="EndSemesterExam">End Semester Exam</MenuItem>
                     <MenuItem value="TermWork">Term Work</MenuItem>
                     <MenuItem value="PracticalExamination">Practical Examination</MenuItem>
+                    <MenuItem value="OralExamination">Oral Examination</MenuItem>
                   </Select>
                 </div>
 
