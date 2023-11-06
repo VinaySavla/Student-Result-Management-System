@@ -36,6 +36,31 @@ const Body = () => {
   });
   const [search, setSearch] = useState(false);
 
+  const [selectedYear, setSelectedYear] = useState('');
+  const [semesters, setSemesters] = useState([]);
+  const yearAvailableOptions = [1, 2, 3, 4];
+  const semesterOptions = [
+    { year: 1, semester: 1 },
+    { year: 1, semester: 2 },
+    { year: 2, semester: 3 },
+    { year: 2, semester: 4 },
+    { year: 3, semester: 5 },
+    { year: 3, semester: 6 },
+    { year: 4, semester: 7 },
+    { year: 4, semester: 8 },
+  ];
+
+  const handleYearChange = (e) => {
+    const selectedYear = e.target.value;
+    const selYear = { ...value, year: e.target.value }
+    setValue(selYear)
+    setSelectedYear(selectedYear);
+    const filteredSemesters = semesterOptions.filter(
+      (semester) => semester.year === parseInt(selectedYear)
+    );
+    setSemesters(filteredSemesters);
+  };
+
   useEffect(() => {
     if (Object.keys(store.errors).length !== 0) {
       setError(store.errors);
@@ -141,13 +166,13 @@ const Body = () => {
               sx={{ height: 36, width: 224 }}
               inputProps={{ "aria-label": "Without label" }}
               value={value.year}
-              onChange={(e) => setValue({ ...value, year: e.target.value })}
-            >
-              <MenuItem value="">None</MenuItem>
-              <MenuItem value="1">1</MenuItem>
-              <MenuItem value="2">2</MenuItem>
-              <MenuItem value="3">3</MenuItem>
-              <MenuItem value="4">4</MenuItem>
+              onChange={handleYearChange}>
+              <MenuItem value={selectedYear}>Select Year</MenuItem>
+              {yearAvailableOptions.map((year) => (
+                <MenuItem key={year} value={year}>
+                  {`${year}`}
+                </MenuItem>
+              ))}
             </Select>
             <label htmlFor="semester">Semester</label>
             <Select
@@ -158,15 +183,12 @@ const Body = () => {
               value={value.semester}
               onChange={(e) => setValue({ ...value, semester: e.target.value })}
             >
-              <MenuItem value="">None</MenuItem>
-              <MenuItem value="1">1</MenuItem>
-              <MenuItem value="2">2</MenuItem>
-              <MenuItem value="3">3</MenuItem>
-              <MenuItem value="4">4</MenuItem>
-              <MenuItem value="5">5</MenuItem>
-              <MenuItem value="6">6</MenuItem>
-              <MenuItem value="7">7</MenuItem>
-              <MenuItem value="8">8</MenuItem>
+               <MenuItem value="">Select Semester</MenuItem>
+                    {semesters.map((semester) => (
+                      <MenuItem key={`${semester.year}- ${semester.semester}`} value={semester.semester}>
+                        {`${semester.semester}`}
+                      </MenuItem>
+                    ))}
             </Select>
             <label htmlFor="division">Division</label>
             <Select
