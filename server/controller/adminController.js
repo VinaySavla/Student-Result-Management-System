@@ -528,6 +528,7 @@ export const addStudent = async (req, res) => {
       fatherContactNumber,
       motherContactNumber,
       year,
+      semester,
     } = req.body;
     const errors = { emailError: String };
     const existingStudent = await Student.findOne({ email });
@@ -576,6 +577,7 @@ export const addStudent = async (req, res) => {
       fatherContactNumber,
       motherContactNumber,
       year,
+      semester,
       passwordUpdated,
     });
     await newStudent.save();

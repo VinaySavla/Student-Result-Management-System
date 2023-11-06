@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
 });
 mongoose
   // .connect(process.env.CONNECTION_URL, {
+      // .connect("mongodb+srv://VinaySavla:Savlavinay29@cluster0.neciakc.mongodb.net/", {
   .connect("mongodb+srv://SRMS:Sakec4321@cluster0.grn9igb.mongodb.net/?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,

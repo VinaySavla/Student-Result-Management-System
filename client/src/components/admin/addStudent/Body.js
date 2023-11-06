@@ -29,12 +29,38 @@ const Body = () => {
     academicYear: "",
     gender: "",
     year: "",
+    semester: "",
     fatherName: "",
     motherName: "",
     division: "",
     fatherContactNumber: "",
     motherContactNumber: "",
   });
+
+  const [selectedYear, setSelectedYear] = useState('');
+  const [semesters, setSemesters] = useState([]);
+  const yearAvailableOptions = [1, 2, 3, 4];
+  const semesterOptions = [
+    { year: 1, semester: 1 },
+    { year: 1, semester: 2 },
+    { year: 2, semester: 3 },
+    { year: 2, semester: 4 },
+    { year: 3, semester: 5 },
+    { year: 3, semester: 6 },
+    { year: 4, semester: 7 },
+    { year: 4, semester: 8 },
+  ];
+
+  const handleYearChange = (e) => {
+    const selectedYear = e.target.value;
+    const selYear = { ...value, year: e.target.value }
+    setValue(selYear)
+    setSelectedYear(selectedYear);
+    const filteredSemesters = semesterOptions.filter(
+      (semester) => semester.year === parseInt(selectedYear)
+    );
+    setSemesters(filteredSemesters);
+  };
 
   useEffect(() => {
     if (Object.keys(store.errors).length !== 0) {
@@ -67,6 +93,7 @@ const Body = () => {
           academicYear: "",
           gender: "",
           year: "",
+          semester: "",
           fatherName: "",
           motherName: "",
           division: "",
@@ -183,6 +210,118 @@ const Body = () => {
                     }
                   />
                 </div>
+                
+                <div className={classes.adminForm3}>
+                  <h1 className={classes.adminLabel}>Gender :</h1>
+                  <Select
+                    required
+                    displayEmpty
+                    sx={{ height: 36 }}
+                    inputProps={{ "aria-label": "Without label" }}
+                    value={value.gender}
+                    onChange={(e) =>
+                      setValue({ ...value, gender: e.target.value })
+                    }>
+                    <MenuItem value="">None</MenuItem>
+                    <MenuItem value="Male">Male</MenuItem>
+                    <MenuItem value="Female">Female</MenuItem>
+                  </Select>
+                </div>
+                <div className={classes.adminForm3}>
+                  <h1 className={classes.adminLabel}>Division :</h1>
+                  <Select
+                    required
+                    displayEmpty
+                    sx={{ height: 36 }}
+                    inputProps={{ "aria-label": "Without label" }}
+                    value={value.division}
+                    onChange={(e) =>
+                      setValue({ ...value, division: e.target.value })
+                    }>
+                    <MenuItem value="">None</MenuItem>
+                    <MenuItem value="1">1</MenuItem>
+                    <MenuItem value="2">2</MenuItem>
+                    <MenuItem value="3">3</MenuItem>
+                    <MenuItem value="4">4</MenuItem>
+                    <MenuItem value="5">5</MenuItem>
+                    <MenuItem value="6">6</MenuItem>
+                    <MenuItem value="7">7</MenuItem>
+                    <MenuItem value="8">8</MenuItem>
+                    <MenuItem value="9">9</MenuItem>
+                  </Select>
+                </div>
+              </div>
+              <div className={classes.adminForm2r}>
+              <div className={classes.adminForm3}>
+                  <h1 className={classes.adminLabel}>Department :</h1>
+                  <Select
+                    required
+                    displayEmpty
+                    sx={{ height: 36 }}
+                    inputProps={{ "aria-label": "Without label" }}
+                    value={value.department}
+                    onChange={(e) =>
+                      setValue({ ...value, department: e.target.value })
+                    }>
+                    <MenuItem value="">None</MenuItem>
+                    {departments?.map((dp, idx) => (
+                      <MenuItem key={idx} value={dp.department}>
+                        {dp.department}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </div>
+                <div className={classes.adminForm3}>
+                <h1 className={classes.adminLabel}>Year :</h1>
+                  <Select
+                    required
+                    displayEmpty
+                    sx={{ height: 36 }}
+                    inputProps={{ "aria-label": "Without label" }}
+                    value={value.year}
+                    onChange={handleYearChange}>
+                    <MenuItem value={selectedYear}>Select Year</MenuItem>
+                    {yearAvailableOptions.map((year) => (
+                      <MenuItem key={year} value={year}>
+                        {`${year}`}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </div>
+                <div className={classes.adminForm3}>
+                  <h1 className={classes.adminLabel}>Semester :</h1>
+                  <Select
+                    required
+                    displayEmpty
+                    sx={{ height: 36 }}
+                    inputProps={{ "aria-label": "Without label" }}
+                    value={value.semester}
+                    onChange={(e) =>
+                      setValue({ ...value, semester: e.target.value })
+                    }>
+                    <MenuItem value="">Select Semester</MenuItem>
+                    {semesters.map((semester) => (
+                      <MenuItem key={`${semester.year}- ${semester.semester}`} value={semester.semester}>
+                        {`${semester.semester}`}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </div>
+                
+                <div className={classes.adminForm3}>
+                  <h1 className={classes.adminLabel}>Contact Number :</h1>
+
+                  <input
+                    required
+                    placeholder="Contact Number"
+                    className={classes.adminInput}
+                    type="number"
+                    value={value.contactNumber}
+                    onChange={(e) =>
+                      setValue({ ...value, contactNumber: e.target.value })
+                    }
+                  />
+                </div>
                 <div className={classes.adminForm3}>
                   <h1 className={classes.adminLabel}>Father's Name :</h1>
 
@@ -208,75 +347,6 @@ const Body = () => {
                     value={value.motherName}
                     onChange={(e) =>
                       setValue({ ...value, motherName: e.target.value })
-                    }
-                  />
-                </div>
-                <div className={classes.adminForm3}>
-                  <h1 className={classes.adminLabel}>Year :</h1>
-                  <Select
-                    required
-                    displayEmpty
-                    sx={{ height: 36 }}
-                    inputProps={{ "aria-label": "Without label" }}
-                    value={value.year}
-                    onChange={(e) =>
-                      setValue({ ...value, year: e.target.value })
-                    }>
-                    <MenuItem value="">None</MenuItem>
-                    <MenuItem value="1">1</MenuItem>
-                    <MenuItem value="2">2</MenuItem>
-                    <MenuItem value="3">3</MenuItem>
-                    <MenuItem value="4">4</MenuItem>
-                  </Select>
-                </div>
-              </div>
-              <div className={classes.adminForm2r}>
-                <div className={classes.adminForm3}>
-                  <h1 className={classes.adminLabel}>Department :</h1>
-                  <Select
-                    required
-                    displayEmpty
-                    sx={{ height: 36 }}
-                    inputProps={{ "aria-label": "Without label" }}
-                    value={value.department}
-                    onChange={(e) =>
-                      setValue({ ...value, department: e.target.value })
-                    }>
-                    <MenuItem value="">None</MenuItem>
-                    {departments?.map((dp, idx) => (
-                      <MenuItem key={idx} value={dp.department}>
-                        {dp.department}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </div>
-                <div className={classes.adminForm3}>
-                  <h1 className={classes.adminLabel}>Gender :</h1>
-                  <Select
-                    required
-                    displayEmpty
-                    sx={{ height: 36 }}
-                    inputProps={{ "aria-label": "Without label" }}
-                    value={value.gender}
-                    onChange={(e) =>
-                      setValue({ ...value, gender: e.target.value })
-                    }>
-                    <MenuItem value="">None</MenuItem>
-                    <MenuItem value="Male">Male</MenuItem>
-                    <MenuItem value="Female">Female</MenuItem>
-                  </Select>
-                </div>
-                <div className={classes.adminForm3}>
-                  <h1 className={classes.adminLabel}>Contact Number :</h1>
-
-                  <input
-                    required
-                    placeholder="Contact Number"
-                    className={classes.adminInput}
-                    type="number"
-                    value={value.contactNumber}
-                    onChange={(e) =>
-                      setValue({ ...value, contactNumber: e.target.value })
                     }
                   />
                 </div>
@@ -318,29 +388,7 @@ const Body = () => {
                     }
                   />
                 </div>
-                <div className={classes.adminForm3}>
-                  <h1 className={classes.adminLabel}>Division :</h1>
-                  <Select
-                    required
-                    displayEmpty
-                    sx={{ height: 36 }}
-                    inputProps={{ "aria-label": "Without label" }}
-                    value={value.division}
-                    onChange={(e) =>
-                      setValue({ ...value, division: e.target.value })
-                    }>
-                    <MenuItem value="">None</MenuItem>
-                    <MenuItem value="1">1</MenuItem>
-                    <MenuItem value="2">2</MenuItem>
-                    <MenuItem value="3">3</MenuItem>
-                    <MenuItem value="4">4</MenuItem>
-                    <MenuItem value="5">5</MenuItem>
-                    <MenuItem value="6">6</MenuItem>
-                    <MenuItem value="7">7</MenuItem>
-                    <MenuItem value="8">8</MenuItem>
-                    <MenuItem value="9">9</MenuItem>
-                  </Select>
-                </div>
+                
 
                 <div className={classes.adminForm3}>
                   <h1 className={classes.adminLabel}>Avatar :</h1>
@@ -373,6 +421,7 @@ const Body = () => {
                     academicYear: "",
                     gender: "",
                     year: "",
+                    semester: "",
                     fatherName: "",
                     motherName: "",
                     division: "",

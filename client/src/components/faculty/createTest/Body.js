@@ -17,11 +17,38 @@ const Body = () => {
     subjectCode: "",
     division: "",
     year: "",
+    semester: "",
     test: "",
     totalMarks: "",
     date: "",
     department: user.result.department,
   });
+
+  const [selectedYear, setSelectedYear] = useState('');
+  const [semesters, setSemesters] = useState([]);
+  const yearAvailableOptions = [1, 2, 3, 4];
+  const semesterOptions = [
+    { year: 1, semester: 1 },
+    { year: 1, semester: 2 },
+    { year: 2, semester: 3 },
+    { year: 2, semester: 4 },
+    { year: 3, semester: 5 },
+    { year: 3, semester: 6 },
+    { year: 4, semester: 7 },
+    { year: 4, semester: 8 },
+  ];
+
+  const handleYearChange = (e) => {
+    const selectedYear = e.target.value;
+    const selYear = { ...value, year: e.target.value }
+    setValue(selYear)
+    setSelectedYear(selectedYear);
+    const filteredSemesters = semesterOptions.filter(
+      (semester) => semester.year === parseInt(selectedYear)
+    );
+    setSemesters(filteredSemesters);
+  };
+
 
   useEffect(() => {
     if (Object.keys(store.errors).length !== 0) {
@@ -30,6 +57,7 @@ const Body = () => {
         subjectCode: "",
         division: "",
         year: "",
+        semester: "",
         test: "",
         totalMarks: "",
         date: "",
@@ -53,6 +81,7 @@ const Body = () => {
           subjectCode: "",
           division: "",
           year: "",
+          semester: "",
           test: "",
           totalMarks: "",
           date: "",
@@ -135,40 +164,6 @@ const Body = () => {
                   />
                 </div>
                 <div className={classes.adminForm3}>
-                  <h1 className={classes.adminLabel}>Year :</h1>
-                  <Select
-                    required
-                    displayEmpty
-                    sx={{ height: 36 }}
-                    inputProps={{ "aria-label": "Without label" }}
-                    value={value.year}
-                    onChange={(e) =>
-                      setValue({ ...value, year: e.target.value })
-                    }>
-                    <MenuItem value="">None</MenuItem>
-                    <MenuItem value="1">1</MenuItem>
-                    <MenuItem value="2">2</MenuItem>
-                    <MenuItem value="3">3</MenuItem>
-                    <MenuItem value="4">4</MenuItem>
-                  </Select>
-                </div>
-              </div>
-              <div className={classes.adminForm2r}>
-                <div className={classes.adminForm3}>
-                  <h1 className={classes.adminLabel}>Total Marks :</h1>
-
-                  <input
-                    required
-                    placeholder="Total Marks"
-                    className={classes.adminInput}
-                    type="number"
-                    value={value.totalMarks}
-                    onChange={(e) =>
-                      setValue({ ...value, totalMarks: e.target.value })
-                    }
-                  />
-                </div>
-                <div className={classes.adminForm3}>
                   <h1 className={classes.adminLabel}>Date :</h1>
 
                   <input
@@ -180,6 +175,45 @@ const Body = () => {
                       setValue({ ...value, date: e.target.value })
                     }
                   />
+                </div>
+                
+              </div>
+              <div className={classes.adminForm2r}>
+              <div className={classes.adminForm3}>
+                <h1 className={classes.adminLabel}>Year :</h1>
+                  <Select
+                    required
+                    displayEmpty
+                    sx={{ height: 36 }}
+                    inputProps={{ "aria-label": "Without label" }}
+                    value={value.year}
+                    onChange={handleYearChange}>
+                    <MenuItem value={selectedYear}>Select Year</MenuItem>
+                    {yearAvailableOptions.map((year) => (
+                      <MenuItem key={year} value={year}>
+                        {`${year}`}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </div>
+                <div className={classes.adminForm3}>
+                  <h1 className={classes.adminLabel}>Semester :</h1>
+                  <Select
+                    required
+                    displayEmpty
+                    sx={{ height: 36 }}
+                    inputProps={{ "aria-label": "Without label" }}
+                    value={value.semester}
+                    onChange={(e) =>
+                      setValue({ ...value, semester: e.target.value })
+                    }>
+                    <MenuItem value="">Select Semester</MenuItem>
+                    {semesters.map((semester) => (
+                      <MenuItem key={`${semester.year}- ${semester.semester}`} value={semester.semester}>
+                        {`${semester.semester}`}
+                      </MenuItem>
+                    ))}
+                  </Select>
                 </div>
                 <div className={classes.adminForm3}>
                   <h1 className={classes.adminLabel}>Division :</h1>
@@ -204,6 +238,20 @@ const Body = () => {
                     <MenuItem value="9">9</MenuItem>
                   </Select>
                 </div>
+                <div className={classes.adminForm3}>
+                  <h1 className={classes.adminLabel}>Total Marks :</h1>
+
+                  <input
+                    required
+                    placeholder="Total Marks"
+                    className={classes.adminInput}
+                    type="number"
+                    value={value.totalMarks}
+                    onChange={(e) =>
+                      setValue({ ...value, totalMarks: e.target.value })
+                    }
+                  />
+                </div>
               </div>
             </div>
             <div className={classes.adminFormButton}>
@@ -216,6 +264,7 @@ const Body = () => {
                     subjectCode: "",
                     division: "",
                     year: "",
+                    semester: "",
                     test: "",
                     totalMarks: "",
                     date: "",

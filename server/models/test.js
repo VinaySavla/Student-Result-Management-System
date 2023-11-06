@@ -22,6 +22,10 @@ const testSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  semester: {
+    type: String,
+    required: true,
+  },
   division: {
     type: String,
     required: true,

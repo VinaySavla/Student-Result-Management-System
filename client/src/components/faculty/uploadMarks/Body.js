@@ -29,6 +29,7 @@ const Body = () => {
   const [value, setValue] = useState({
     department: "",
     year: "",
+    semester: "",
     division: "",
     test: "",
     subjectCode: "",
@@ -42,6 +43,7 @@ const Body = () => {
       setValue({
         department: "",
         year: "",
+        semester: "",
         division: "",
         test: "",
         subjectCode: "",
@@ -77,6 +79,7 @@ const Body = () => {
         value.department,
         value.division,
         value.year,
+        value.semester,
         value.test,
         value.subjectCode
       )
@@ -99,6 +102,7 @@ const Body = () => {
         setValue({
           department: "",
           year: "",
+          semester: "",
           test: "",
           division: "",
           subjectCode: "",
@@ -113,10 +117,10 @@ const Body = () => {
   }, [store.errors, store.faculty.marksUploaded]);
 
   useEffect(() => {
-    if (value.year !== "" && value.division !== "") {
+    if (value.year !== "" && value.semester !== "" && value.division !== "") {
       dispatch(getTest(value));
     }
-  }, [value.year, value.division]);
+  }, [value.year, value.semester, value.division]);
 
   return (
     <div className="flex-[0.8] mt-3">
@@ -145,6 +149,25 @@ const Body = () => {
               <MenuItem value="3">3</MenuItem>
               <MenuItem value="4">4</MenuItem>
             </Select>
+            <label htmlFor="semester">Semester</label>
+            <Select
+              required
+              displayEmpty
+              sx={{ height: 36, width: 224 }}
+              inputProps={{ "aria-label": "Without label" }}
+              value={value.semester}
+              onChange={(e) => setValue({ ...value, semester: e.target.value })}
+            >
+              <MenuItem value="">None</MenuItem>
+              <MenuItem value="1">1</MenuItem>
+              <MenuItem value="2">2</MenuItem>
+              <MenuItem value="3">3</MenuItem>
+              <MenuItem value="4">4</MenuItem>
+              <MenuItem value="5">5</MenuItem>
+              <MenuItem value="6">6</MenuItem>
+              <MenuItem value="7">7</MenuItem>
+              <MenuItem value="8">8</MenuItem>
+            </Select>
             <label htmlFor="division">Division</label>
             <Select
               required
@@ -165,7 +188,7 @@ const Body = () => {
               <MenuItem value="8">8</MenuItem>
               <MenuItem value="9">9</MenuItem>
             </Select>
-            <label htmlFor="year">Subject Code</label>
+            <label htmlFor="subjectcode">Subject Code</label>
             <Select
               required
               displayEmpty
@@ -183,7 +206,7 @@ const Body = () => {
                 </MenuItem>
               ))}
             </Select>
-            <label htmlFor="year">Test</label>
+            <label htmlFor="test">Test</label>
             <Select
               required
               displayEmpty
