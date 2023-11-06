@@ -16,8 +16,33 @@ const Body = () => {
   const [value, setValue] = useState({
     department: "",
     year: "",
+    semester: ""
   });
   const [search, setSearch] = useState(false);
+  const [selectedYear, setSelectedYear] = useState('');
+  const [semesters, setSemesters] = useState([]);
+  const yearAvailableOptions = [1, 2, 3, 4];
+  const semesterOptions = [
+    { year: 1, semester: 1 },
+    { year: 1, semester: 2 },
+    { year: 2, semester: 3 },
+    { year: 2, semester: 4 },
+    { year: 3, semester: 5 },
+    { year: 3, semester: 6 },
+    { year: 4, semester: 7 },
+    { year: 4, semester: 8 },
+  ];
+
+  const handleYearChange = (e) => {
+    const selectedYear = e.target.value;
+    const selYear = {...value, year: e.target.value}
+    setValue(selYear)
+    setSelectedYear(selectedYear);
+    const filteredSemesters = semesterOptions.filter(
+      (semester) => semester.year === parseInt(selectedYear)
+    );
+    setSemesters(filteredSemesters);
+  };
 
   useEffect(() => {
     if (Object.keys(store.errors).length !== 0) {
@@ -71,20 +96,47 @@ const Body = () => {
                 </MenuItem>
               ))}
             </Select>
-            <label htmlFor="year">Year</label>
-            <Select
-              required
-              displayEmpty
-              sx={{ height: 36, width: 224 }}
-              inputProps={{ "aria-label": "Without label" }}
-              value={value.year}
-              onChange={(e) => setValue({ ...value, year: e.target.value })}>
-              <MenuItem value="">None</MenuItem>
-              <MenuItem value="1">1</MenuItem>
-              <MenuItem value="2">2</MenuItem>
-              <MenuItem value="3">3</MenuItem>
-              <MenuItem value="4">4</MenuItem>
-            </Select>
+            
+            <div>
+              <label htmlFor="year">Year</label>
+              <br/>
+              <Select
+                required
+                displayEmpty
+                sx={{ height: 36, width: 224 }}
+                inputProps={{ "aria-label": "Without label" }}
+                id="year"
+                value={selectedYear}
+                onChange={handleYearChange} >
+                <MenuItem value={selectedYear}>Select Year</MenuItem>
+                {yearAvailableOptions.map((year) => (
+                  <MenuItem key={year} value={year}>
+                    {`${year}`}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+            <div>
+              <label htmlFor="semester">Semester</label>
+              <Select
+                required
+                displayEmpty
+                sx={{ height: 36, width: 224 }}
+                inputProps={{
+                  "aria-label": "Without label"
+                }}
+                id="semester"
+                value={value.semester}
+                disabled={!selectedYear}
+                onChange={(e) => setValue({ ...value, semester: e.target.value })}>
+                <MenuItem value="">Select Semester</MenuItem>
+                {semesters.map((semester) => (
+                  <MenuItem key={`${semester.year}- ${semester.semester}`} value={semester.semester}>
+                    {`${semester.semester}`}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
             <button
               className={`${classes.adminFormSubmitButton} w-56`}
               type="submit">
@@ -154,8 +206,8 @@ const Body = () => {
               )}
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 

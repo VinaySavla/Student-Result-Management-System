@@ -21,6 +21,10 @@ const studentSchema = new Schema({
     type: Number,
     required: true,
   },
+  semester: {
+    type: Number,
+    required: true,
+  },
   subjects: [
     {
       type: Schema.Types.ObjectId,

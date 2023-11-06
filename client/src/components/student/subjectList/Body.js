@@ -17,6 +17,7 @@ const Body = () => {
     year: "",
   });
   const [search, setSearch] = useState(false);
+  const [selectedSemester, setSelectedSemester] = useState(1);     //semester state test
 
   useEffect(() => {
     if (Object.keys(store.errors).length !== 0) {
@@ -78,8 +79,11 @@ const Body = () => {
                     <h1 className={`${classes.adminDataHeading} col-span-2`}>
                       Subject Code
                     </h1>
-                    <h1 className={`${classes.adminDataHeading} col-span-3`}>
+                    <h1 className={`${classes.adminDataHeading} col-span-2`}>
                       Subject Name
+                    </h1>
+                    <h1 className={`${classes.adminDataHeading} col-span-1`}>
+                      Semester
                     </h1>
                     <h1 className={`${classes.adminDataHeading} col-span-1`}>
                       Total Lectures
@@ -98,8 +102,12 @@ const Body = () => {
                         {sub.subjectCode}
                       </h1>
                       <h1
-                        className={`col-span-3 ${classes.adminDataBodyFields}`}>
+                        className={`col-span-2 ${classes.adminDataBodyFields}`}>
                         {sub.subjectName}
+                      </h1>
+                      <h1
+                        className={`col-span-1 ${classes.adminDataBodyFields}`}>
+                        {sub.semester}
                       </h1>
                       <h1
                         className={`col-span-1 ${classes.adminDataBodyFields}`}>

@@ -331,13 +331,15 @@ export const getNotice = async (req, res) => {
 
 export const addSubject = async (req, res) => {
   try {
-    const { totalLectures, department, subjectCode, subjectName, year } =
+    const { totalLectures, department, subjectCode, subjectName, year, semester } =
       req.body;
     const errors = { subjectError: String };
     const subject = await Subject.findOne({ subjectCode });
     if (subject) {
       errors.subjectError = "Given Subject is already added";
-      return res.status(400).json(errors);
+      let AR=res.status(400).json(errors);
+      console.log(AR);
+      // return res.status(400).json(errors);
     }
 
     const newSubject = await new Subject({
@@ -346,10 +348,11 @@ export const addSubject = async (req, res) => {
       subjectCode,
       subjectName,
       year,
+      semester
     });
 
     await newSubject.save();
-    const students = await Student.find({ department, year });
+    const students = await Student.find({ department, year, semester });
     if (students.length !== 0) {
       for (var i = 0; i < students.length; i++) {
         students[i].subjects.push(newSubject._id);
@@ -370,12 +373,12 @@ export const addSubject = async (req, res) => {
 
 export const getSubject = async (req, res) => {
   try {
-    const { department, year } = req.body;
+    const { department, year, semester } = req.body;
 
     if (!req.userId) return res.json({ message: "Unauthenticated" });
     const errors = { noSubjectError: String };
 
-    const subjects = await Subject.find({ department, year });
+    const subjects = await Subject.find({ department, year, semester });
     if (subjects.length === 0) {
       errors.noSubjectError = "No Subject Found";
       return res.status(404).json(errors);
