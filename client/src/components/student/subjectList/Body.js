@@ -10,14 +10,39 @@ import * as classes from "../../../utils/styles";
 const Body = () => {
   const dispatch = useDispatch();
   const [error, setError] = useState({});
+  const departments = useSelector((state) => state.admin.allDepartment);
   const [loading, setLoading] = useState(false);
   const store = useSelector((state) => state);
   const [value, setValue] = useState({
     department: "",
     year: "",
+    semester: ""
   });
   const [search, setSearch] = useState(false);
-  const [selectedSemester, setSelectedSemester] = useState(1);     //semester state test
+  const [selectedYear, setSelectedYear] = useState('');
+  const [semesters, setSemesters] = useState([]);
+  const yearAvailableOptions = [1, 2, 3, 4];
+  const semesterOptions = [
+    { year: 1, semester: 1 },
+    { year: 1, semester: 2 },
+    { year: 2, semester: 3 },
+    { year: 2, semester: 4 },
+    { year: 3, semester: 5 },
+    { year: 3, semester: 6 },
+    { year: 4, semester: 7 },
+    { year: 4, semester: 8 },
+  ];
+
+  const handleYearChange = (e) => {
+    const selectedYear = e.target.value;
+    const selYear = {...value, year: e.target.value}
+    setValue(selYear)
+    setSelectedYear(selectedYear);
+    const filteredSemesters = semesterOptions.filter(
+      (semester) => semester.year === parseInt(selectedYear)
+    );
+    setSemesters(filteredSemesters);
+  };
 
   useEffect(() => {
     if (Object.keys(store.errors).length !== 0) {
@@ -50,7 +75,75 @@ const Body = () => {
           <MenuBookIcon />
           <h1>All Subjects</h1>
         </div>
-        <div className=" mr-10 bg-white rounded-xl pt-6 pl-6 h-[29.5rem]">
+        <div className=" mr-10 bg-white grid grid-cols-4 rounded-xl pt-6 pl-6 h-[29.5rem]">
+          <form
+            className="flex flex-col space-y-2 col-span-1"
+            onSubmit={handleSubmit}>
+            <label htmlFor="department">Department</label>
+            <Select
+              required
+              displayEmpty
+              sx={{ height: 36, width: 224 }}
+              inputProps={{ "aria-label": "Without label" }}
+              value={value.department}
+              onChange={(e) =>
+                setValue({ ...value, department: e.target.value })
+              }>
+              <MenuItem value="">None</MenuItem>
+              {departments?.map((dp, idx) => (
+                <MenuItem key={idx} value={dp.department}>
+                  {dp.department}
+                </MenuItem>
+              ))}
+            </Select>
+            
+            <div>
+              <label htmlFor="year">Year</label>
+              <br/>
+              <Select
+                required
+                displayEmpty
+                sx={{ height: 36, width: 224 }}
+                inputProps={{ "aria-label": "Without label" }}
+                id="year"
+                value={selectedYear}
+                onChange={handleYearChange} >
+                <MenuItem value={selectedYear}>Select Year</MenuItem>
+                {yearAvailableOptions.map((year) => (
+                  <MenuItem key={year} value={year}>
+                    {`${year}`}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+            <div>
+              <label htmlFor="semester">Semester</label>
+              <Select
+                required
+                displayEmpty
+                sx={{ height: 36, width: 224 }}
+                inputProps={{
+                  "aria-label": "Without label"
+                }}
+                id="semester"
+                value={value.semester}
+                disabled={!selectedYear}
+                onChange={(e) => setValue({ ...value, semester: e.target.value })}>
+                <MenuItem value="">Select Semester</MenuItem>
+                {semesters.map((semester) => (
+                  <MenuItem key={`${semester.year}- ${semester.semester}`} value={semester.semester}>
+                    {`${semester.semester}`}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+            <button
+              className={`${classes.adminFormSubmitButton} w-56`}
+              type="submit">
+              Search
+            </button>
+          </form>
+
           <div className="col-span-3 mr-6">
             <div className={classes.loadingAndError}>
               {loading && (
@@ -62,13 +155,14 @@ const Body = () => {
                   messageColor="blue"
                 />
               )}
-              {error.noSubjectError && (
+              {(error.noSubjectError || error.backendError) && (
                 <p className="text-red-500 text-2xl font-bold">
-                  {error.noSubjectError}
+                  {error.noSubjectError || error.backendError}
                 </p>
               )}
             </div>
-            {!loading &&
+            {search &&
+              !loading &&
               Object.keys(error).length === 0 &&
               subjects?.length !== 0 && (
                 <div className={classes.adminData}>
@@ -79,11 +173,8 @@ const Body = () => {
                     <h1 className={`${classes.adminDataHeading} col-span-2`}>
                       Subject Code
                     </h1>
-                    <h1 className={`${classes.adminDataHeading} col-span-2`}>
+                    <h1 className={`${classes.adminDataHeading} col-span-3`}>
                       Subject Name
-                    </h1>
-                    <h1 className={`${classes.adminDataHeading} col-span-1`}>
-                      Semester
                     </h1>
                     <h1 className={`${classes.adminDataHeading} col-span-1`}>
                       Total Lectures
@@ -102,12 +193,8 @@ const Body = () => {
                         {sub.subjectCode}
                       </h1>
                       <h1
-                        className={`col-span-2 ${classes.adminDataBodyFields}`}>
+                        className={`col-span-3 ${classes.adminDataBodyFields}`}>
                         {sub.subjectName}
-                      </h1>
-                      <h1
-                        className={`col-span-1 ${classes.adminDataBodyFields}`}>
-                        {sub.semester}
                       </h1>
                       <h1
                         className={`col-span-1 ${classes.adminDataBodyFields}`}>
@@ -119,8 +206,8 @@ const Body = () => {
               )}
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 

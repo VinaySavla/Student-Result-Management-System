@@ -1,17 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getSubject } from "../../../redux/actions/studentActions";
-
+import { getAllDepartment } from "../../../redux/actions/adminActions";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import Body from "./Body";
 
 const SubjectList = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getSubject(user.result.department, user.result.year));
+    dispatch(getAllDepartment());
   }, [dispatch]);
   return (
     <div className="bg-[#d6d9e0] h-screen flex items-center justify-center">
