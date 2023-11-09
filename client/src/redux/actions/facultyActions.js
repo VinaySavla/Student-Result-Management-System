@@ -74,13 +74,14 @@ export const getStudent = (formData) => async (dispatch) => {
 };
 
 export const uploadMark =
-  (marks, department, division, year, test, subjectCode) => async (dispatch) => {
+  (marks, department, division, year, semester, test, subjectCode) => async (dispatch) => {
     try {
       const formData = {
         marks,
         department,
         division,
         year,
+        semester,
         test,
         subjectCode,
       };
